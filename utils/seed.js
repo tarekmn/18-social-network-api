@@ -23,8 +23,23 @@ connection.once("open", async () => {
         email: "test@gmail.com",
       },
       {
+        username: "Ben",
+        email: "test2@gmail.com",
+      },
+    ],
+    (insertError) =>
+      insertError ? handleError(insertError) : console.log("Inserted")
+  );
+
+  await Thought.insertMany(
+    [
+      {
+        thoughtText: "Hello these are my thoughts",
         username: "Tarek",
-        email: "test@gmail.com",
+      },
+      {
+        thoughtText: "This is the second thought",
+        username: "Ben",
       },
     ],
     (insertError) =>
@@ -33,6 +48,6 @@ connection.once("open", async () => {
 
   // Log out the seed data to indicate what should appear in the database
   console.table(User);
-  console.info("Seeding complete! 🌱");
-  process.exit(0);
+  console.info("Seeding complete!");
+  // process.exit(0);
 });

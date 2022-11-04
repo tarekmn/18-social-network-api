@@ -7,10 +7,10 @@ const {
   deleteUser,
 } = require("../../controllers/userController");
 
-// /api/courses
-router.route("/").get(getUsers).post(createUser);
+// // /api/courses
+// router.route("/").get(getUsers).post(createUser);
 
-// /api/users/:userId
-router.route("/:userId").get(getSingleUser).put(updateUser).delete(deleteUser);
+// // /api/users/:userId
+// router.route("/:userId").get(getSingleUser).put(updateUser).delete(deleteUser);
 
 module.exports = router;
