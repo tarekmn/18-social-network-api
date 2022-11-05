@@ -35,11 +35,26 @@ connection.once("open", async () => {
     [
       {
         thoughtText: "Hello these are my thoughts",
-        username: "Tarek",
+        username: "6365783bd61b786979c6705f",
       },
       {
         thoughtText: "This is the second thought",
-        username: "Ben",
+        username: "6365783bd61b786979c67060",
+      },
+    ],
+    (insertError) =>
+      insertError ? handleError(insertError) : console.log("Inserted")
+  );
+
+  await Reaction.insertMany(
+    [
+      {
+        reactionBody: "Hello these are my thoughts",
+        username: "6365783bd61b786979c6705f",
+      },
+      {
+        reactionBody: "This is the second thought",
+        username: "6365783bd61b786979c67060",
       },
     ],
     (insertError) =>
