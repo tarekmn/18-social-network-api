@@ -18,42 +18,63 @@ connection.once("open", async () => {
   // Insert users
 
   const user1 = await User.create({
-    username: "Tarek",
-
-    email: "test@gmail.com",
+    "username": "Tarek",
+    "email": "test@gmail.com",
   });
 
   const user2 = await User.create({
-    username: "Ben",
-    email: "test2@gmail.com",
+    "username": "Ben",
+    "email": "test2@gmail.com",
   });
 
   // Insert thought
   const thought1 = await Thought.create({
-    thoughtText: "Hello these are my thoughts",
-    username: user1.username,
+    "thoughtText": "Hello these are my thoughts",
+    "username": user1,
   });
 
   const thought2 = await Thought.create({
-    thoughtText: "This is the second thought",
-    username: user2.username,
+    "thoughtText": "This is the second thought",
+    "username": user2,
   });
 
-  // Insert reaction
-  await Reaction.insertMany(
-    [
-      {
-        reactionBody: "Hello these are my thoughts",
-        username: "6365783bd61b786979c6705f",
-      },
-      {
-        reactionBody: "This is the second thought",
-        username: "6365783bd61b786979c67060",
-      },
-    ],
-    (insertError) =>
-      insertError ? handleError(insertError) : console.log("Inserted")
-  );
+await User.findOneAndUpdate(
+  {_id: user1._id },
+  { $push: { thoughts: thought1._id, friends: user2._id }, },
+  { new: true }
+)
+
+
+
+
+const reaction1 = await Reaction.create({
+  "reactionBody": "This is my reaction",
+  "username": user2,
+});
+
+await Thought.findOneAndUpdate(
+  {_id: thought1._id },
+  { $push: { reactions: reaction1._id }, },
+  { new: true }
+)
+
+
+
+  // // Insert reaction
+  // await Reaction.insertMany(
+  //   [
+  //     {
+  //       reactionBody: "Hello these are my thoughts",
+  //       username: "6365783bd61b786979c6705f",
+  //     },
+  //     {
+  //       reactionBody: "This is the second thought",
+  //       username: "6365783bd61b786979c67060",
+  //     },
+  //   ],
+  //   (insertError) =>
+  //     insertError ? handleError(insertError) : console.log("Inserted")
+  // );
 
   // Log out the seed data to indicate what should appear in the database
   console.table(User);
