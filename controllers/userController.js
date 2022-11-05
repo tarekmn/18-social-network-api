@@ -26,34 +26,76 @@ const { User, Thought, Reaction } = require("../models");
 
 module.exports = {
   // Get all users
-  getUsers(req, res) {
-    User.find()
-      .then(async (users) => {
-        return res.json(users);
-      })
-      .catch((err) => {
-        console.log(err);
-        return res.status(500).json(err);
-      });
-  },
+  async getUsers(req, res) {
+    try {
+        const users = await User.find({}).populate({
+            path:"thoughts",
+            populate: {
+                path:"reactions",
+                model: "Reaction"
+            }
+        }).populate('friends')
+        if (!users) {
+            res.status(404).json({message:'No users in db.'})
+        }
+        res.status(200).json(users)
+    } catch (error) {
+      console.log(error.message)
+        res.status(500).json(error)
+    }
+},
+
+
+  // getUsers(req, res) {
+  //   User.find()
+  //     .then(async (users) => {
+  //       return res.json(users);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       return res.status(500).json(err);
+  //     });
+  // },
   // Get a single user
-  getSingleUser(req, res) {
-    User.findOne({ _id: req.params.userId })
-      // .select("-__v")
-      // .lean()
-      .then(async (user) =>
-        !user
-          ? res.status(404).json({ message: "No user with that ID" })
-          : res.json({
-              user,
-              thought: await Thought.find({ _id: req.params.userId }),
-            })
-      )
-      .catch((err) => {
-        console.log(err);
-        return res.status(500).json(err);
-      });
-  },
+
+  async getSingleUser(req, res) {
+    try {
+        const user = await User.findOne({ _id: req.params.userId }).populate({
+            path:"thoughts",
+            populate: {
+                path:"reactions",
+                model: "Reaction"
+            }
+        }).populate('friends')
+        if (!user) {
+            res.status(404).json({message:'No users in db with that ID'})
+        }
+        res.status(200).json(user)
+    } catch (error) {
+      console.log(error.message)
+        res.status(500).json(error)
+    }
+},
+
+
+
+
+  // getSingleUser(req, res) {
+  //   User.findOne({ _id: req.params.userId })
+  //     // .select("-__v")
+  //     // .lean()
+  //     .then(async (user) =>
+  //       !user
+  //         ? res.status(404).json({ message: "No user with that ID" })
+  //         : res.json(
+  //             user
+  //           )
+  //     )
+  //     .catch((err) => {
+  //       console.log(err);
+  //       return res.status(500).json(err);
+  //     });
+  // },
   // // create a new student
   // createStudent(req, res) {
   //   Student.create(req.body)
