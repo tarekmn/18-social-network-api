@@ -6,8 +6,8 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      // required: true,
-      // max_length: 50,
+      required: true,
+      unique: true,
     },
     email: {
       type: String,
@@ -20,18 +20,18 @@ const userSchema = new Schema(
         ref: "Thought",
       },
     ],
-    // friends: [
-    //   {
-    //     type: Schema.Types.ObjectId,
-    //     ref: "User",
-    //   },
-    // ],
+    friends: [
+      {
+        type: Types.ObjectId,
+        ref: "User",
+      },
+    ],
+  },
+  {
+    toJSON: {
+      getters: true,
+    },
   }
-  // {
-  //   toJSON: {
-  //     getters: true,
-  //   },
-  // }
 );
 
 const User = model("User", userSchema);
