@@ -17,7 +17,7 @@ module.exports = {
       //   }
       // })
       if (!data) {
-        res.status(404).json({ message: 'No data in db.' })
+        return res.status(404).json({ message: 'No data in db.' })
       }
       res.status(200).json(data)
     } catch (error) {
@@ -38,7 +38,7 @@ module.exports = {
       //   }
       // }).populate('friends')
       if (!data) {
-        res.status(404).json({ message: 'No thought in db with that ID' })
+        return res.status(404).json({ message: 'No thought in db with that ID' })
       }
       res.status(200).json(data)
     } catch (error) {
@@ -81,7 +81,7 @@ module.exports = {
         { _id: req.params.thoughtId })
 
       if (!data) {
-        res.status(404).json({ message: 'No such thought exists' })
+        return res.status(404).json({ message: 'No such thought exists' })
       }
 
       res.status(200).json(data)
