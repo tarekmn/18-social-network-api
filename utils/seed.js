@@ -38,43 +38,26 @@ connection.once("open", async () => {
     "username": user2,
   });
 
-await User.findOneAndUpdate(
-  {_id: user1._id },
-  { $push: { thoughts: thought1._id, friends: user2._id }, },
-  { new: true }
-)
+  await User.findOneAndUpdate(
+    { _id: user1._id },
+    { $push: { thoughts: thought1._id, friends: user2._id }, },
+    { new: true }
+  )
 
 
 
 
-const reaction1 = await Reaction.create({
-  "reactionBody": "This is my reaction",
-  "username": user2,
-});
+  const reaction1 = await Reaction.create({
+    "reactionBody": "This is my reaction",
+    "username": user2,
+  });
 
-await Thought.findOneAndUpdate(
-  {_id: thought1._id },
-  { $push: { reactions: reaction1._id }, },
-  { new: true }
-)
+  await Thought.findOneAndUpdate(
+    { _id: thought1._id },
+    { $push: { reactions: reaction1._id }, },
+    { new: true }
+  )
 
-
-
-  // // Insert reaction
-  // await Reaction.insertMany(
-  //   [
-  //     {
-  //       reactionBody: "Hello these are my thoughts",
-  //       username: "6365783bd61b786979c6705f",
-  //     },
-  //     {
-  //       reactionBody: "This is the second thought",
-  //       username: "6365783bd61b786979c67060",
-  //     },
-  //   ],
-  //   (insertError) =>
-  //     insertError ? handleError(insertError) : console.log("Inserted")
-  // );
 
   // Log out the seed data to indicate what should appear in the database
   console.table(User);

@@ -16,7 +16,7 @@ module.exports = {
         }
       }).populate('friends')
       if (!users) {
-        res.status(404).json({ message: 'No users in db.' })
+        return res.status(404).json({ message: 'No users in db.' })
       }
       res.status(200).json(users)
     } catch (error) {
