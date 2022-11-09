@@ -116,11 +116,11 @@ module.exports = {
       const data = await Reaction.findOneAndRemove(
         { _id: req.params.reactionId })
 
-      // const updateThought = await Thought.findByIdAndUpdate(
-      //   { _id: req.params.thoughtId },
-      //   { $isDeleted: { reactions: data } },
-      //   { new: true }
-      // )
+      const updateThought = await Thought.findByIdAndUpdate(
+        { _id: req.params.thoughtId },
+        { $pull: { reactions: req.params.reactionId } },
+        { new: true }
+      )
 
       if (!data) {
         return res.status(404).json({ message: 'No such thought exists' })
