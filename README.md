@@ -2,7 +2,7 @@
 
 ## Description
 
-A client has reached out to me about building an E-commerce website. They already have an in-house front end development team so they just need the backend application. I will configure a working Express.js API to use Sequelize to interact with a MySQL database.
+As a developer looking to strengthen my skills, I decided to build out a social media network. In this particular project, I will be working on the back-end in which I will build an API for the network. Here, users can share their thoughts, react to friends' thoughts and create a friends list. I will use Express.js for routing, a MongoDB database, and the Mongoose ODM.
 
 ## Table of Contents
 
@@ -15,17 +15,17 @@ A client has reached out to me about building an E-commerce website. They alread
 This code does not require any installation and can be invoked by using the following command:
 
 ```bash
-node server.js or npx nodemon server.js
+node index.js or npx nodemon index.js
 ```
 
 ## Usage
 
 The following GitHub repo url is:
-https://github.com/tarekmn/13-orm-ecommerce-back-end
+https://github.com/tarekmn/18-social-network-api
 
 In addition, I included a Screencastify video url:
 
-https://drive.google.com/file/d/1RXbDsbfe5qKZllrn-AltTUmIr7I_rP1-/view
+https://drive.google.com/file/d/1nNFC0oXVD1QoK2R2plZ6rDuNb1-ywMDX/view
 
 ## License
 

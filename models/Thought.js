@@ -1,5 +1,7 @@
 const { Schema, model, Types } = require("mongoose");
 
+
+//creating thoughtSchema
 const thoughtSchema = new Schema(
   {
     thoughtText: {

@@ -9,13 +9,7 @@ module.exports = {
   async getThoughts(req, res) {
     try {
       const data = await Thought.find({})
-      // .populate({
-      // //   path: "username",
-      //   populate: {
-      //     path: "reactions",
-      //     model: "Reaction"
-      //   }
-      // })
+
       if (!data) {
         return res.status(404).json({ message: 'No data in db.' })
       }
@@ -30,13 +24,6 @@ module.exports = {
   async getSingleThought(req, res) {
     try {
       const data = await Thought.findOne({ _id: req.params.thoughtId })
-      // .populate({
-      //   path: "thoughts",
-      //   populate: {
-      //     path: "reactions",
-      //     model: "Reaction"
-      //   }
-      // }).populate('friends')
       if (!data) {
         return res.status(404).json({ message: 'No thought in db with that ID' })
       }
@@ -50,10 +37,6 @@ module.exports = {
   async createThought(req, res) {
     try {
       const data = await Thought.create(req.body)
-      //update user with new thought
-      // const updateUser = await User.findByIdAndUpdate(
-      //   { _id: req.params.username },
-      //   { $set: req.body })
       res.status(200).json(data)
     } catch (error) {
       console.log(error.message)
