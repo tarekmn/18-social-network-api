@@ -96,10 +96,13 @@ module.exports = {
     try {
       const data = await Reaction.create(req.body)
 
-      //update user with new thought
+      // update user with new thought
       const updateThought = await Thought.findByIdAndUpdate(
-        { _id: req.params.username },
-        { reactions: req.body })
+        { _id: req.params.thoughtId },
+        { $push: { reactions: data } },
+        { new: true }
+      )
+
       res.status(200).json(data)
     } catch (error) {
       console.log(error.message)
@@ -107,6 +110,33 @@ module.exports = {
     }
 
   },
+
+  async deleteReaction(req, res) {
+    try {
+      const data = await Reaction.findOneAndRemove(
+        { _id: req.params.reactionId })
+
+      // const updateThought = await Thought.findByIdAndUpdate(
+      //   { _id: req.params.thoughtId },
+      //   { $isDeleted: { reactions: data } },
+      //   { new: true }
+      // )
+
+      if (!data) {
+        return res.status(404).json({ message: 'No such thought exists' })
+      }
+
+
+
+      res.status(200).json(data)
+    } catch (error) {
+      console.log(error.message)
+      res.status(500).json(error)
+    }
+  },
+
+
+
 
 };
 

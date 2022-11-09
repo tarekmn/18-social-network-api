@@ -49,7 +49,7 @@ connection.once("open", async () => {
 
   const reaction1 = await Reaction.create({
     "reactionBody": "This is my reaction",
-    "username": user2,
+    "thoughtId": user2,
   });
 
   await Thought.findOneAndUpdate(

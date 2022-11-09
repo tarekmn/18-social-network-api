@@ -10,9 +10,9 @@ const reactionSchema = new Schema(
       required: true,
       max_length: 280,
     },
-    username: {
+    thoughtId: {
       type: String,
-      ref: "User",
+      ref: "Thought",
       required: true,
     },
     createdAt: {
